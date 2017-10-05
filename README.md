@@ -2,6 +2,10 @@
 
 This repository presents an image processing pipeline for detecting lane lines in a variety of conditions, including changing road surfaces, curved roads, and variable lighting.
 
+![](./output_images/project.gif)
+
+![](./output_images/challenge.gif)
+
 ---
 
 The goals / steps of this project are the following:
