@@ -84,9 +84,9 @@ Motivated by [Peter Moran's Blog](http://petermoran.org/robust-lane-tracking/) o
 1. Convert an RGB image to a single channel image on a new color space using `cv2.cvtColor()`.
 2. Normalize the single channel image using [CLAHE](http://docs.opencv.org/3.1.0/d5/daf/tutorial_py_histogram_equalization.html) (Contrast Limited Adaptive Histogram Equalization).
 3. Obtain a binary image by selecting the pixels within the range of 'threshold'.
-4. Repeat the process for multiple color spaces and channels, and take the union of all binary images to get an multi-channel-thresholded binary image.
+4. Repeat the process for multiple color spaces and channels, and take the union of all binary images to get a multi-channel-thresholded binary image.
 
-After tuning, I decided to implement three channels and associated threshold values as follows:
+After tuning, I decided to implement three color channels with proper threshold values as follows:
 
 | Color Space        | Channel   |  Threshold |
 |:------------------:|:---------:|:----------:| 
@@ -94,28 +94,51 @@ After tuning, I decided to implement three channels and associated threshold val
 | HSV                | V         | (240, 255) |
 | LAB                | B         | (170, 255) |
 
-Visualize the multi-channel color thresholding on two test images:
+The multi-channel color thresholding was then verified on two test images:
 
 ![alt text][image4]
 ![alt text][image5]
 
 #### Gradient Thresholding
 
+In addition, gradient thresholding was applied on an **undistorted ** image, which consists of the following steps:
+1. Convert an RGB image to graysclae image using `cv2.cvtColor()`.
+2. Calculate the derivative in x and y directions using `cv2.Sobel`.
+3. Based on the thresholds of x and y gradients, gradient magnitude and direction, obtain 4 binary images `sx_binary `, `sy_binary`, `mag_binary`, and `dir_binary`.
+4. Combine those individual thresholds and get a gradient thresholded binary image, according to:
+
+```python
+grad_binary[((sx_binary == 1) & (sy_binary == 1)) | ((mag_binary == 1) & (dir_binary == 1))] = 1
+```
+
+After tuning, `sobel_kernel=3` and the following threshold values are used:
+
+| Gradient  |  Threshold |
+|:---------:|:----------:| 
+| x         | (30, 100)  |
+| y         | (30, 100)  |
+| magnitude | (50, 100)  |
+| direction | (0.7, 1.3) |
+
+The gradient thresholding was then verified on two test images:
+
 ![alt text][image6]
 ![alt text][image7]
 
 #### Color and Gradient Thresholding
+
+Finally, the combination of color and gradient thresholding was adopted, resulting in a union of two binary images as shown below:
 
 ![alt text][image8]
 ![alt text][image9]
 
 ### Lane Lines Detection
 
+The code for this step is contained in the code cells [14]-[16] of [`Test Video Pipeline.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline.ipynb).
 
-#### Sliding Window
+First, I use a histogram and sliding window as a starting point to identify the pixels of lane lines. Once the left and right line pixels are found, fit a second order polynomial to each using `np.polyfit`.
 
-
-#### Look-Ahead Filter
+If a high-confidence detection was obtained in the previous frame, we could use a look-ahead filter to search within a window around the previous detection. The two lane finding methods are illstrated on two test images:
 
 ![alt text][image10]
 ![alt text][image11]
