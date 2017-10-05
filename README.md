@@ -27,7 +27,7 @@ Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/5
 
 ## Camera Calibration
 
-The code for this step is contained in the [`Camera Calibration.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Camera%20Calibration.ipynb).  
+The code for this step is contained in the notebook [`Camera Calibration.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Camera%20Calibration.ipynb).  
 
 A 9x6 chessboard is used for camera calibration. First, I prepared "object points" by assigning the (x, y, z) coordinates of the chessboard corners in the world, under the assumption that the chessboard is fixed on the (x, y) plane at z=0, and the object points are the same for each calibration image. Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time all chessboard corners in a test image are successfully detected. `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 
@@ -39,7 +39,7 @@ Then, I used the `cv2.calibrateCamera()` function to compute the camera calibrat
 
 ### Distortion Correction
 
-The code for this step is contained in the code cells [3]-[4] of [`Test Video Pipeline.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline.ipynb). 
+The code for this step is contained in the code cells [3]-[4] of the notebook [`Test Video Pipeline.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline.ipynb). 
 
 Distortion correction was applied to one of the raw images as illstrated below: 
 
@@ -70,6 +70,20 @@ I use both color and gradient thresholds to create a binary image containing lik
 
 #### Color Thresholding
 
+Motivated by [Peter Moran's Blog on Robust Lane Tracking](http://petermoran.org/robust-lane-tracking/), I explored three different color spaces, including HLS, HSV, and [CIELAB](https://en.wikipedia.org/wiki/Lab_color_space). Color thresholding was conducted on an warped image, which consists of the following steps:
+1. Convert an RGB image to a single channel image on a new color space using `cv2.cvtColor()`.
+2. Normalize the single channel image using [CLAHE](http://docs.opencv.org/3.1.0/d5/daf/tutorial_py_histogram_equalization.html) (Contrast Limited Adaptive Histogram Equalization).
+3. Obtain a binary image by selecting the pixels within the range of 'threshold'.
+4. Repeat the process for multiple color spaces and channels, and take the union of all binary images to get an multi-channel-thresholded binary image.
+
+After tuning, I decided to use the following three channels and associated threshold values:
+
+| Color Space        | Channel   |  Threshold |
+|:------------------:|:---------:|:----------:| 
+| HLS                | L         | (240, 255) |
+| HSV                | V         | (240, 255) |
+| LAB                | B         | (170, 255) |
+
 
 #### Gradient Thresholding
 
@@ -80,16 +94,21 @@ I use both color and gradient thresholds to create a binary image containing lik
 ### Lane Lines Detection
 
 
+#### Sliding Window
+
+
+#### Look-Ahead Filter
+
+
 ### Curvature and Offset
 
 
 
 ## Pipeline (project video)
 
-### Look-Ahead Filter
 
 
-### Line Class
+### `Line()` Class
 
 
 ## Pipeline (challenge video)
