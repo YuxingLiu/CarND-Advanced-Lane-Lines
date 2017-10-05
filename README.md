@@ -32,6 +32,7 @@ Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/5
 [image11]: ./output_images/search2.png "Color/Search 2"
 [image12]: ./output_images/screen1.png "Color/Screen 1"
 [image13]: ./output_images/screen2.png "Color/Screen 2"
+[image14]: ./output_images/find_line.png "Flowchart"
 
 ---
 
@@ -136,7 +137,7 @@ Finally, the combination of color and gradient thresholding was adopted, resulti
 
 The code for this step is contained in the code cells [14]-[16] of [`Test Video Pipeline.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline.ipynb).
 
-First, I use a histogram and sliding window as a starting point to identify the pixels of lane lines. Once the left and right line pixels are found, fit a second order polynomial to each using `np.polyfit`.
+First, I use a histogram and sliding window as a starting point to identify the pixels of lane lines. Once the left and right line pixels are found, fit a second order polynomial to each using `np.polyfit()`.
 
 If the lane lines were successfully found in the previous frame, we could use a look-ahead filter to search within a window around the previous detection. The two lane finding methods are illustrated on two test images:
 
@@ -180,16 +181,26 @@ Once the line positions were found in warped space, we could project those lines
 ![alt text][image13]
 
 
-
 ## Pipeline (project video)
 
 ### Line Class
 
 The code for this step is contained in the code cell [18] of [`Test Video Pipeline.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline.ipynb).
 
+To have a more robust lane detection algorithm, a `Line()` class was defined, which enables the following methods:
+1. Keep track of the previous line position to utilize look-ahead filter.
+2. Perform sanity check to decide whether the current detection is reliable.
+3. Smooth the lane detection over n past frames via a moving-average filter.
+
+A flowchart of the method `line.find_line()` is shown as follows:
+
+<img src="./output_images/find_line.png" width="400">
+
+
 ### Process Pipeline
 
 The code for this step is contained in the code cells [19]-[20] of [`Test Video Pipeline.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline.ipynb).
+
 
 
 Here's a link to [project video result](./test_videos_output/project_video.mp4).
