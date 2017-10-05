@@ -22,6 +22,16 @@ Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/5
 [image1]: ./output_images/camera_cal.png "Camera Calibration"
 [image2]: ./output_images/dist_corr.png "Distortion Correction"
 [image3]: ./output_images/perspect_trans.png "Perspective Transform"
+[image4]: ./output_images/col_thresh1.png "Color Thresholding 1"
+[image5]: ./output_images/col_thresh2.png "Color Thresholding 2"
+[image6]: ./output_images/grad_thresh1.png "Gradient Thresholding 1"
+[image7]: ./output_images/grad_thresh2.png "Gradient Thresholding 2"
+[image8]: ./output_images/com_thresh1.png "Color/Gradient Thresholding 1"
+[image9]: ./output_images/com_thresh2.png "Color/Gradient Thresholding 2"
+[image10]: ./output_images/search1.png "Color/Search 1"
+[image11]: ./output_images/search2.png "Color/Search 2"
+[image12]: ./output_images/screen1.png "Color/Screen 1"
+[image13]: ./output_images/screen2.png "Color/Screen 2"
 
 ---
 
@@ -84,12 +94,20 @@ After tuning, I decided to implement three channels and associated threshold val
 | HSV                | V         | (240, 255) |
 | LAB                | B         | (170, 255) |
 
+Visualize the multi-channel color thresholding on two test images:
+
+![alt text][image4]
+![alt text][image5]
 
 #### Gradient Thresholding
 
+![alt text][image6]
+![alt text][image7]
 
 #### Color and Gradient Thresholding
 
+![alt text][image8]
+![alt text][image9]
 
 ### Lane Lines Detection
 
@@ -99,10 +117,13 @@ After tuning, I decided to implement three channels and associated threshold val
 
 #### Look-Ahead Filter
 
+![alt text][image10]
+![alt text][image11]
 
 ### Curvature and Offset
 
-$$x_{1,2} = {-b\pm\sqrt{b^2 - 4ac} \over 2a}.$$
+![alt text][image12]
+![alt text][image13]
 
 ## Pipeline (project video)
 
@@ -110,5 +131,11 @@ $$x_{1,2} = {-b\pm\sqrt{b^2 - 4ac} \over 2a}.$$
 
 ### `Line()` Class
 
+Here's a link to [project video result](./test_videos_output/project_video.mp4).
+
 
 ## Pipeline (challenge video)
+
+Here's a link to [challenge video result](./test_videos_output/project_video.mp4).
+
+Here's a link to [project video result](./test_videos_output/project_video2.mp4) using the new pipeline.
