@@ -70,13 +70,13 @@ I use both color and gradient thresholds to create a binary image containing lik
 
 #### Color Thresholding
 
-Motivated by [Peter Moran's Blog on Robust Lane Tracking](http://petermoran.org/robust-lane-tracking/), I explored three different color spaces, including HLS, HSV, and [CIELAB](https://en.wikipedia.org/wiki/Lab_color_space). Color thresholding was conducted on an warped image, which consists of the following steps:
+Motivated by [Peter Moran's Blog](http://petermoran.org/robust-lane-tracking/) on robust lane tracking, I explored three different color spaces, including HLS, HSV, and [CIELAB](https://en.wikipedia.org/wiki/Lab_color_space). Color thresholding was conducted on a **warped** image, which consists of the following steps:
 1. Convert an RGB image to a single channel image on a new color space using `cv2.cvtColor()`.
 2. Normalize the single channel image using [CLAHE](http://docs.opencv.org/3.1.0/d5/daf/tutorial_py_histogram_equalization.html) (Contrast Limited Adaptive Histogram Equalization).
 3. Obtain a binary image by selecting the pixels within the range of 'threshold'.
 4. Repeat the process for multiple color spaces and channels, and take the union of all binary images to get an multi-channel-thresholded binary image.
 
-After tuning, I decided to use the following three channels and associated threshold values:
+After tuning, I decided to implement three channels and associated threshold values as follows:
 
 | Color Space        | Channel   |  Threshold |
 |:------------------:|:---------:|:----------:| 
@@ -102,7 +102,7 @@ After tuning, I decided to use the following three channels and associated thres
 
 ### Curvature and Offset
 
-
+$$x_{1,2} = {-b\pm\sqrt{b^2 - 4ac} \over 2a}.$$
 
 ## Pipeline (project video)
 
