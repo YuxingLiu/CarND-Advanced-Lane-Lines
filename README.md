@@ -49,7 +49,7 @@ Distortion correction was applied to one of the raw images as illstrated below:
 
 The code for this step is contained in the code cells [5]-[7] of [`Test Video Pipeline.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline.ipynb).
 
-In this step, a perspective transform was applied to rectify a undistorted image to a birds' eye view. The source and destination points  are manully tuned as follows:
+Perspective transform was applied to rectify a undistorted image to a birds' eye view. The source and destination points are manully tuned as follows:
 
 | Source        | Destination   | 
 |:-------------:|:-------------:| 
@@ -62,7 +62,34 @@ I use the `cv2.getPerspectiveTransform()` function to compute the transform matr
 
 ![alt text][image3]
 
+### Binary Image
+
+The code for this step is contained in the code cells [8]-[13] of [`Test Video Pipeline.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline.ipynb).
+
+I use both color and gradient thresholds to create a binary image containing likely lane pixels.
+
+#### Color Thresholding
+
+
+#### Gradient Thresholding
+
+
+#### Color and Gradient Thresholding
+
+
+### Lane Lines Detection
+
+
+### Curvature and Offset
+
+
+
 ## Pipeline (project video)
+
+### Look-Ahead Filter
+
+
+### Line Class
 
 
 ## Pipeline (challenge video)
