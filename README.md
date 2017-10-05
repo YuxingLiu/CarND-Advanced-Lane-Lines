@@ -17,12 +17,52 @@ The goals / steps of this project are the following:
 
 Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/571/view) individually and describe how I addressed each point in my implementation. 
 
+[//]: # (Image References)
+
+[image1]: ./output_images/camera_cal.png "Camera Calibration"
+[image2]: ./output_images/dist_corr.png "Distortion Correction"
+[image3]: ./output_images/perspect_trans.png "Perspective Transform"
+
 ---
 
 ## Camera Calibration
 
-The code for this step is contained in the IPython notebook named [`Camera Calibration.ipynb`](https://review.udacity.com/#!/rubrics/571/view).  
+The code for this step is contained in the [`Camera Calibration.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Camera%20Calibration.ipynb).  
 
-A 9x6 chessboard is used for camera calibration. First, I prepare "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
+A 9x6 chessboard is used for camera calibration. First, I prepared "object points" by assigning the (x, y, z) coordinates of the chessboard corners in the world, under the assumption that the chessboard is fixed on the (x, y) plane at z=0, and the object points are the same for each calibration image. Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time all chessboard corners in a test image are successfully detected. `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 
-I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
+Then, I used the `cv2.calibrateCamera()` function to compute the camera calibration and distortion coefficients. I applied this distortion correction to the chessboard image using the `cv2.undistort()` function and obtained this result: 
+
+![alt text][image1]
+
+## Pipeline (single image)
+
+### Distortion Correction
+
+The code for this step is contained in the code cells [3]-[4] of [`Test Video Pipeline.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline.ipynb). 
+
+Distortion correction was applied to one of the raw images as illstrated below: 
+
+![alt text][image2]
+
+### Perspective Transform
+
+The code for this step is contained in the code cells [5]-[7] of [`Test Video Pipeline.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline.ipynb).
+
+In this step, a perspective transform was applied to rectify a undistorted image to a birds' eye view. The source and destination points  are manully tuned as follows:
+
+| Source        | Destination   | 
+|:-------------:|:-------------:| 
+| 584, 458      | 256, 0        | 
+| 209, 720      | 256, 720      |
+| 1113, 720     | 1024, 720     |
+| 698, 458      | 1024, 0       |
+
+I use the `cv2.getPerspectiveTransform()` function to compute the transform matrix and `cv2.warpPerspective()` to warp the image. The perspective transform was verified by drawing the `src` and `dst` points onto a straight-lines test image and its warped counterpart as follows:
+
+![alt text][image3]
+
+## Pipeline (project video)
+
+
+## Pipeline (challenge video)
