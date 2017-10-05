@@ -147,6 +147,10 @@ If the lane lines were successfully found in the previous frame, we could use a 
 
 The code for this step is contained in the code cell [17] of [`Test Video Pipeline.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline.ipynb).
 
+The fitted second order polynomial lane lines have the form:
+
+![alt text](https://latex.codecogs.com/gif.latex?f(y)=Ay^2&space;&plus;&space;By&space;&plus;&space;C)
+
 ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
 
 ![alt text][image12]
@@ -175,3 +179,7 @@ The code for this section is in the notebook [`Test Video Pipeline_challenge.ipy
 Here's a link to [challenge video result](./test_videos_output/project_video.mp4).
 
 Here's a link to [project video result](./test_videos_output/project_video2.mp4) using the new pipeline.
+
+
+## Discussion
+
