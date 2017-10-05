@@ -147,11 +147,34 @@ If the lane lines were successfully found in the previous frame, we could use a 
 
 The code for this step is contained in the code cell [17] of [`Test Video Pipeline.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline.ipynb).
 
-The fitted second order polynomial lane lines have the form:
+The fitted second order polynomial line have the form:
 
-![alt text](https://latex.codecogs.com/gif.latex?f(y)=Ay^2&space;&plus;&space;By&space;&plus;&space;C)
+![](https://latex.codecogs.com/gif.latex?f(y)=Ay^2&space;&plus;&space;By&space;&plus;&space;C)
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+In the case of the second order polynomial curve, the radius of curvature is given as follows:
+
+![](https://latex.codecogs.com/gif.latex?R_{curve}&space;=&space;\frac{(1&plus;(2Ay&plus;B)^2)^{3/2}}{|2A|})
+
+First, I took the average of two fitted lines in the **warped** image to get a polynomial for the midpoint of lane:
+
+![](https://latex.codecogs.com/gif.latex?f_{mid}(y)&space;=&space;\frac{1}{2}(A_{left}&space;&plus;&space;A_{right})y^2&space;&plus;&space;\frac{1}{2}(B_{left}&space;&plus;&space;B_{right})y&space;&plus;&space;\frac{1}{2}(C_{left}&space;&plus;&space;C_{right}))
+
+Then, I projected the polynomial of the midpoint from pixels space to world space, according to the following conversions:
+```python
+ym_per_pix = 30/720 # meters per pixel in y dimension
+xm_per_pix = 3.7/700 # meters per pixel in x dimension
+```
+
+Finally, the radius of curvature in meters is calculated at `y = image.shape[0]*ym_per_pix`.
+
+Under the assumption that the camera is mounted at the center of the car, the offset of the lane midpoint from the center of the image is the vehicle distance to the center of the lane. Then, the vehicle offset in meters can be calculated as:
+```python
+    mid_image = (img_undist.shape[1]-1)/2
+    mid_lane = (left_fitx[-1] + right_fitx[-1])/2
+    offset = (mid_image - mid_lane) * xm_per_pix
+```
+
+Once the line positions were found in warped space, we could project those lines onto the unwarped image, using the inverse transform matrix. Besides, the curvature, offset, the binary warped image, and a search window are included in the output image as well. Two output images are given below:
 
 ![alt text][image12]
 ![alt text][image13]
