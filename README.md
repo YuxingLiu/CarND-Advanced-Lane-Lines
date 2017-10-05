@@ -37,7 +37,7 @@ Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/5
 
 ## Camera Calibration
 
-The code for this step is contained in the notebook [`Camera Calibration.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Camera%20Calibration.ipynb).  
+The code for this step is in the notebook [`Camera Calibration.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Camera%20Calibration.ipynb).  
 
 A 9x6 chessboard is used for camera calibration. First, I prepared "object points" by assigning the (x, y, z) coordinates of the chessboard corners in the world, under the assumption that the chessboard is fixed on the (x, y) plane at z=0, and the object points are the same for each calibration image. Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time all chessboard corners in a test image are successfully detected. `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 
@@ -51,7 +51,7 @@ Then, I used the `cv2.calibrateCamera()` function to compute the camera calibrat
 
 The code for this step is contained in the code cells [3]-[4] of the notebook [`Test Video Pipeline.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline.ipynb). 
 
-Distortion correction was applied to one of the raw images as illstrated below: 
+Distortion correction was applied to one of the raw images as illustrated below: 
 
 ![alt text][image2]
 
@@ -59,7 +59,7 @@ Distortion correction was applied to one of the raw images as illstrated below:
 
 The code for this step is contained in the code cells [5]-[7] of [`Test Video Pipeline.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline.ipynb).
 
-Perspective transform was applied to rectify a undistorted image to a birds' eye view. The source and destination points are manully tuned as follows:
+Perspective transform was applied to rectify a undistorted image to a birds' eye view. The source and destination points are manually tuned as follows:
 
 | Source        | Destination   | 
 |:-------------:|:-------------:| 
@@ -102,7 +102,7 @@ The multi-channel color thresholding was then verified on two test images:
 #### Gradient Thresholding
 
 In addition, gradient thresholding was applied on an **undistorted ** image, which consists of the following steps:
-1. Convert an RGB image to graysclae image using `cv2.cvtColor()`.
+1. Convert an RGB image to grayscale image using `cv2.cvtColor()`.
 2. Calculate the derivative in x and y directions using `cv2.Sobel`.
 3. Based on the thresholds of x and y gradients, gradient magnitude and direction, obtain 4 binary images `sx_binary `, `sy_binary`, `mag_binary`, and `dir_binary`.
 4. Combine those individual thresholds and get a gradient thresholded binary image, according to:
@@ -138,26 +138,39 @@ The code for this step is contained in the code cells [14]-[16] of [`Test Video 
 
 First, I use a histogram and sliding window as a starting point to identify the pixels of lane lines. Once the left and right line pixels are found, fit a second order polynomial to each using `np.polyfit`.
 
-If a high-confidence detection was obtained in the previous frame, we could use a look-ahead filter to search within a window around the previous detection. The two lane finding methods are illstrated on two test images:
+If the lane lines were successfully found in the previous frame, we could use a look-ahead filter to search within a window around the previous detection. The two lane finding methods are illustrated on two test images:
 
 ![alt text][image10]
 ![alt text][image11]
 
 ### Curvature and Offset
 
+The code for this step is contained in the code cell [17] of [`Test Video Pipeline.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline.ipynb).
+
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+
 ![alt text][image12]
 ![alt text][image13]
 
+
+
 ## Pipeline (project video)
 
+### Line Class
 
+The code for this step is contained in the code cell [18] of [`Test Video Pipeline.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline.ipynb).
 
-### `Line()` Class
+### Process Pipeline
+
+The code for this step is contained in the code cells [19]-[20] of [`Test Video Pipeline.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline.ipynb).
+
 
 Here's a link to [project video result](./test_videos_output/project_video.mp4).
 
 
 ## Pipeline (challenge video)
+
+The code for this section is in the notebook [`Test Video Pipeline_challenge.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline_challenge.ipynb).
 
 Here's a link to [challenge video result](./test_videos_output/project_video.mp4).
 
