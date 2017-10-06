@@ -197,7 +197,7 @@ Once the line positions were found in warped space, we could project those lines
 
 The code for this step is contained in the code cell [18] of [`Test Video Pipeline.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline.ipynb).
 
-To have a more robust lane detection algorithm, a `Line()` class was defined, which enables the following methods:
+Inspired by [Huijing Huang's GitHub repos](https://github.com/dmsehuang/CarND-Advanced-Lane-Lines), a `Line()` class was defined to improve the robustness of the lane detection algorithm, by enabling the following methods:
 1. Keep track of the previous line position to utilize look-ahead filter.
 2. Perform sanity check to decide whether the current detection is reliable.
 3. Smooth the lane detection over n past frames via a moving-average filter.
