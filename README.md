@@ -254,7 +254,7 @@ Here's a link to [project video result](./test_videos_output/project_video2.mp4)
 
 Although the lane detection framework yields good results on both videos, threshold values of color filter and sanity check have to be modified to account for different lighting and road conditions. It might be interesting to explore some adaption or normalization methods, in order to reduce the sensitivity on those threshold values.
 
-In order to make the algorithm work for the harder-challenge video, some improvements are expected to be helpful:
+In order to make the algorithm work for the harder-challenge video, some improvements could be helpful:
 1. Add a reset feature in `Line()` class, such that if lines was not found for several frames in a row, start searching from scratch to re-establish the measurement.
 2. Reduce the longitudinal length of the search region, because of a sharp turn.
 3. Try using convolutions to find the best window center positions in a binary warped image. It should be more robust than a histogram when the lane has large variation in x direction from birds' eye view.
