@@ -228,8 +228,8 @@ Here's a link to [project video result](./test_videos_output/project_video.mp4).
 
 The code for this section is in the notebook [`Test Video Pipeline_challenge.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline_challenge.ipynb).
 
-In order to implement the lane detection method on the challenge video, a few modificications are made:
-1. Gradient threshold is removed from the pipeline, since it cannot effectively differentiate between the actual lane lines and outliers such as shadows and differnt paving colors.
+In order to implement the lane detection method on the challenge video, a few modifications are made:
+1. Gradient threshold is removed from the pipeline, since it cannot effectively differentiate between the actual lane lines and outliers such as shadows and different paving colors.
 2. The color threshold values are lower due to different lighting conditions. 
 
 | Color Space        | Channel   |  Threshold |
@@ -242,7 +242,7 @@ In order to implement the lane detection method on the challenge video, a few mo
 
 Here's a link to [challenge video result](./test_videos_output/project_video.mp4).
 
-Thanks to the robust methods like look-ahead filter, sanity check, and smoothing, the modified pipeline also works quite well on the project video, even if the binary iamge might be a bit messy due to reduced color thresholds.
+Thanks to the robust methods like look-ahead filter, sanity check, and smoothing, the modified pipeline also works quite well on the project video, even if the binary image might be a bit messy due to reduced color thresholds.
 
 ![](./output_images/project_v2_20s.gif)
 ![](./output_images/project_v2_37s.gif)
@@ -252,3 +252,10 @@ Here's a link to [project video result](./test_videos_output/project_video2.mp4)
 
 ## Discussion
 
+Although the lane detection framework yields good results on both videos, threshold values of color filter and sanity check have to be modified to account for different lighting and road conditions. It might be interesting to explore some adaption or normalization methods, in order to reduce the sensitivity on those threshold values.
+
+In order to make the algorithm work for the harder-challenge video, some improvements are expected to be helpful:
+1. Add a reset feature in `Line()` class, such that if lines was not found for several frames in a row, start searching from scratch to re-establish the measurement.
+2. Reduce the longitudinal length of the search region, because of a sharp turn.
+3. Try using convolutions to find the best window center positions in a binary warped image. It should be more robust than a histogram when the lane has large variation in x direction from birds' eye view.
+4. Address the case when only one line is captured by the camera due to a sharp turn.
