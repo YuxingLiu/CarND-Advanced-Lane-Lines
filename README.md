@@ -161,7 +161,7 @@ In the case of the second order polynomial curve, the radius of curvature is giv
 
 ![](https://latex.codecogs.com/gif.latex?R_{curve}&space;=&space;\frac{(1&plus;(2Ay&plus;B)^2)^{3/2}}{|2A|})
 
-First, I took the average of two fitted lines in the **warped** image to get a polynomial for the midpoint of lane:
+First, I took the average of two fitted lines in the warped image to get a polynomial for the midpoint of lane:
 
 ![](https://latex.codecogs.com/gif.latex?f_{mid}(y)&space;=&space;\frac{1}{2}(A_{left}&space;&plus;&space;A_{right})y^2&space;&plus;&space;\frac{1}{2}(B_{left}&space;&plus;&space;B_{right})y&space;&plus;&space;\frac{1}{2}(C_{left}&space;&plus;&space;C_{right}))
 
@@ -243,6 +243,9 @@ In order to implement the lane detection method on the challenge video, a few mo
 Here's a link to [challenge video result](./test_videos_output/project_video.mp4).
 
 Thanks to the robust methods like look-ahead filter, sanity check, and smoothing, the modified pipeline also works quite well on the project video, even if the binary iamge might be a bit messy due to reduced color thresholds.
+
+![](./output_images/project_v2_20s.gif)
+![](./output_images/project_v2_37s.gif)
 
 Here's a link to [project video result](./test_videos_output/project_video2.mp4) using the new pipeline.
 
