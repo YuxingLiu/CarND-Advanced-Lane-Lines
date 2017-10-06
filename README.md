@@ -1,4 +1,5 @@
 # Advanced Lane Finding Project
+[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
 This repository presents an image processing pipeline for detecting lane lines in a variety of conditions, including changing road surfaces, curved roads, and variable lighting.
 
@@ -179,6 +180,11 @@ Under the assumption that the camera is mounted at the center of the car, the of
     offset = (mid_image - mid_lane) * xm_per_pix
 ```
 
+
+### Visualization
+
+The code for this step is contained in the code cells [19]-[20] of [`Test Video Pipeline.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline.ipynb).
+
 Once the line positions were found in warped space, we could project those lines onto the unwarped image, using the inverse transform matrix. Besides, the curvature, offset, the binary warped image, and a search window are included in the output image as well. Two output images are given below:
 
 ![alt text][image12]
@@ -199,13 +205,6 @@ To have a more robust lane detection algorithm, a `Line()` class was defined, wh
 A flowchart of the method `line.find_line()` is shown as follows:
 
 <img src="./output_images/find_line.png" width="400">
-
-
-### Process Pipeline
-
-The code for this step is contained in the code cells [19]-[20] of [`Test Video Pipeline.ipynb`](https://github.com/YuxingLiu/CarND-Advanced-Lane-Lines/blob/master/Test%20Video%20Pipeline.ipynb).
-
-
 
 Here's a link to [project video result](./test_videos_output/project_video.mp4).
 
