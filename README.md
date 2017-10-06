@@ -256,6 +256,6 @@ Although the lane detection framework yields good results on both videos, thresh
 
 To make the algorithm work for the harder-challenge video, some improvements could be helpful:
 1. Add a reset feature in `Line()` class, such that if lines was not found for several frames in a row, start searching from scratch to re-establish the measurement.
-2. Reduce the longitudinal length of the search region, because of a sharp turn.
+2. Reduce the longitudinal length of the search region to accommodate a sharp turn.
 3. Try using convolutions to find the best window center positions in a binary warped image. It should be more robust than a histogram when the lane has large variation in x direction from birds' eye view.
 4. Address the case when only one line is captured by the camera due to a sharp turn.
