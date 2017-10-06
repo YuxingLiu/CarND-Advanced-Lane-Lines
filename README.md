@@ -231,11 +231,13 @@ The code for this section is in the notebook [`Test Video Pipeline_challenge.ipy
 In order to implement the lane detection method on the challenge video, a few modificications are made:
 1. Gradient threshold is removed from the pipeline, since it cannot effectively differentiate between the actual lane lines and outliers such as shadows and differnt paving colors.
 2. The color threshold values are lower due to different lighting conditions. 
+
 | Color Space        | Channel   |  Threshold |
 |:------------------:|:---------:|:----------:| 
 | HLS                | L         | (**190**, 255) |
 | HSV                | V         | (**190**, 255) |
 | LAB                | B         | (**150**, 255) |
+
 3. In the sanity check, the threshold value for minimum horizontally distance between two lines is reduced to 300, as the lane lines appear to be narrower in the warped image.
 
 Here's a link to [challenge video result](./test_videos_output/project_video.mp4).
